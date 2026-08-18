@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Indocolectivo</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .gallery-item .ph{aspect-ratio:var(--ar,3/4);}
+</style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Worn By You</p>
+    <h1>Gallery</h1>
+    <p>Customers who bought a piece from the collective — or printed their own — and shared it with us. Tag <strong>@indocolectivo</strong> to be featured.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="gallery-masonry" id="galleryGrid"></div>
+  </div>
+</section>
+
+<section class="section on-tint">
+  <div class="container center-text">
+    <p class="eyebrow" style="justify-content:center">Share Yours</p>
+    <h2 style="margin-bottom:14px;">Wearing Indocolectivo?</h2>
+    <p class="muted" style="max-width:460px;margin:0 auto 26px;">Post your fit and tag us — we handpick new photos for this wall every week.</p>
+    <a href="https://instagram.com" class="btn btn-primary" target="_blank" rel="noopener">Tag @indocolectivo on Instagram</a>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/layout.js"></script>
+<script>
+  renderLayout("gallery");
+
+  const galleryPhotos = [
+    { name:"@aditya.wr", brand:"LeBoujoux", from:"#16233F", to:"#FFC531", ar:"3/4" },
+    { name:"@ninaputri", brand:"Rhubee", from:"#5C4B3B", to:"#B99B72", ar:"4/5" },
+    { name:"@ryanfebri", brand:"Custom Print", from:"#1E3F3A", to:"#6FC5B0", ar:"1/1" },
+    { name:"@dilaz", brand:"LeBoujoux", from:"#2B3E6B", to:"#FFC531", ar:"3/4" },
+    { name:"@kirana.s", brand:"Rhubee", from:"#2B241F", to:"#B99B72", ar:"4/5" },
+    { name:"@bagas_r", brand:"LeBoujoux", from:"#0F1B33", to:"#7B8AA8", ar:"3/4" },
+    { name:"@wina.h", brand:"Custom Print", from:"#D98A3D", to:"#1B1913", ar:"1/1" },
+    { name:"@fadhil.k", brand:"Rhubee", from:"#7D8B73", to:"#B99B72", ar:"4/5" },
+    { name:"@mitha_", brand:"LeBoujoux", from:"#16233F", to:"#2B3E6B", ar:"3/4" },
+    { name:"@arka.p", brand:"Custom Print", from:"#2F5D56", to:"#6FC5B0", ar:"1/1" },
+    { name:"@sella.w", brand:"Rhubee", from:"#3A342B", to:"#7D8B73", ar:"4/5" },
+    { name:"@yoga_id", brand:"LeBoujoux", from:"#FFC531", to:"#16233F", ar:"3/4" }
+  ];
+
+  document.getElementById("galleryGrid").innerHTML = galleryPhotos.map(g => `
+    <div class="gallery-item">
+      <div class="ph" style="--ar:${g.ar};background:linear-gradient(135deg, ${g.from}, ${g.to} 130%);"><span>${g.brand}</span></div>
+      <div class="gallery-caption">${g.name} &middot; ${g.brand}</div>
+    </div>
+  `).join("");
+</script>
+</body>
+</html>

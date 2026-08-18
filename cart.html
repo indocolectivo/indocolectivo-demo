@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart — Indocolectivo</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Your Bag</p>
+    <h1>Cart</h1>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="pdp-grid" style="grid-template-columns:1.6fr 1fr;align-items:flex-start;">
+      <div class="simple-card" id="cartLines"></div>
+      <div class="simple-card">
+        <h3 style="font-size:18px;margin-bottom:18px;">Order Summary</h3>
+        <div class="price-line" style="display:flex;justify-content:space-between;font-size:13.5px;color:var(--ink-soft);margin-bottom:10px;">
+          <span>Subtotal</span><span id="sumSubtotal">IDR 0</span>
+        </div>
+        <div class="price-line" style="display:flex;justify-content:space-between;font-size:13.5px;color:var(--ink-soft);margin-bottom:14px;">
+          <span>Estimated shipping</span><span>IDR 20,000</span>
+        </div>
+        <div style="border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;font-weight:700;font-size:16px;margin-bottom:22px;">
+          <span>Total</span><span id="sumTotal" style="font-family:'IBM Plex Mono',monospace;color:var(--teal);">IDR 0</span>
+        </div>
+        <button class="btn btn-primary" style="width:100%;" id="checkoutAllBtn">Checkout</button>
+        <p class="pdp-note" style="text-align:center;">Demo checkout — no payment is processed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/layout.js"></script>
+<script>
+  renderLayout("shop");
+
+  function fmt(n){ return "IDR " + n.toLocaleString("id-ID"); }
+
+  function draw(){
+    const cart = getCart();
+    const wrap = document.getElementById("cartLines");
+    if(!cart.length){
+      wrap.innerHTML = `<div class="cart-empty">
+        <p style="margin-bottom:18px;">Your cart is empty.</p>
+        <a href="shop.html" class="btn btn-secondary">Browse Shop</a>
+      </div>`;
+      document.getElementById("sumSubtotal").textContent = fmt(0);
+      document.getElementById("sumTotal").textContent = fmt(0);
+      return;
+    }
+    wrap.innerHTML = cart.map(item => `
+      <div class="cart-line">
+        ${item.image
+          ? `<img src="${item.image}" alt="${item.title}">`
+          : `<div class="ph" style="background:linear-gradient(135deg, ${item.phFrom||'#2F5D56'}, ${item.phTo||'#1E3F3A'} 130%);"></div>`}
+        <div class="cart-line-info">
+          <h4>${item.title}</h4>
+          <p>${item.brand} &middot; ${item.type} &middot; Size ${item.size}${item.placement ? ' &middot; Print: '+item.placement : ''}</p>
+          <p style="margin-top:6px;font-family:'IBM Plex Mono',monospace;color:var(--ink);">${fmt(item.price)} &times; ${item.qty}</p>
+        </div>
+        <button class="btn btn-secondary btn-sm" data-key="${item.key}">Remove</button>
+      </div>
+    `).join("");
+
+    wrap.querySelectorAll("button[data-key]").forEach(btn => {
+      btn.addEventListener("click", () => { removeFromCart(btn.dataset.key); draw(); renderLayout("shop"); });
+    });
+
+    const subtotal = cart.reduce((n,i) => n + i.price*i.qty, 0);
+    document.getElementById("sumSubtotal").textContent = fmt(subtotal);
+    document.getElementById("sumTotal").textContent = fmt(subtotal + (subtotal ? 20000 : 0));
+  }
+
+  document.getElementById("checkoutAllBtn").addEventListener("click", () => {
+    if(!getCart().length) return;
+    alert("This is a demo — checkout is not connected to a payment gateway yet.");
+  });
+
+  draw();
+</script>
+</body>
+</html>

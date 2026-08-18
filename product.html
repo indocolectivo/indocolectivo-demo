@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product — Indocolectivo</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<section class="section-tight">
+  <div class="container">
+    <div id="pdpRoot"></div>
+  </div>
+</section>
+
+<section class="section on-tint" id="relatedWrap" style="display:none;">
+  <div class="container">
+    <div class="section-head">
+      <div><p class="eyebrow">More From This Brand</p><h2 id="relatedTitle">You Might Also Like</h2></div>
+    </div>
+    <div class="product-grid" id="relatedGrid"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/layout.js"></script>
+<script src="js/products.js"></script>
+<script src="js/shop.js"></script>
+<script>
+  renderLayout("shop");
+
+  const FEATURE_BULLETS = [
+    "Heavyweight combed cotton, standard Indonesian distro fit — true to size",
+    "Design digitally printed, holds vivid colour wash after wash",
+    "Each piece is made to order — small variances between units are normal",
+    "Ships within 1–2 business days from our Jakarta print studio"
+  ];
+
+  const id = getQueryParam("id");
+  let product = getProductById(id) || PRODUCTS[0];
+  const root = document.getElementById("pdpRoot");
+
+  const GALLERY_LABELS = product.images
+    ? (product.images.length > 1 ? ["Artwork","Detail","On Shirt"].slice(0, product.images.length) : ["On Shirt"])
+    : ["Front","Back","Detail","Worn","Flat Lay"];
+
+  let state = {
+    type: product.category === "Hoodie" ? "Hoodie" : (product.category === "Long Sleeve" ? "Long Sleeve" : "T-Shirt"),
+    size: product.sizes[1] || product.sizes[0],
+    placement: "Front",
+    activeImg: 0
+  };
+
+  function currentPrice(){
+    return CATEGORY_PRICE[state.type] ?? product.price;
+  }
+
+  function galleryHTML(idx){
+    if(product.images){
+      return `<img src="${product.images[idx]}" alt="${product.title} — ${GALLERY_LABELS[idx]}">`;
+    }
+    return `<div class="ph" style="background:linear-gradient(${135 + idx*12}deg, ${product.phFrom}, ${product.phTo} 130%);"><span>${product.title} — ${GALLERY_LABELS[idx]}</span></div>`;
+  }
+
+  function render(){
+    const brand = BRANDS[product.brand];
+    root.innerHTML = `
+      <div class="pdp-grid">
+        <div>
+          <div class="pdp-gallery-main">${galleryHTML(state.activeImg)}</div>
+          ${GALLERY_LABELS.length > 1 ? `
+          <div class="pdp-thumbs" id="pdpThumbs">
+            ${GALLERY_LABELS.map((l,i) => `
+              <div class="pdp-thumb ${i===state.activeImg?'active':''}" data-idx="${i}">
+                ${product.images
+                  ? `<img src="${product.images[i]}" alt="${l}">`
+                  : `<div class="ph" style="background:linear-gradient(${135+i*12}deg, ${product.phFrom}, ${product.phTo} 130%);"><span style="font-size:10px;">${l}</span></div>`}
+              </div>
+            `).join("")}
+          </div>` : ``}
+        </div>
+
+        <div class="pdp-info">
+          <a href="brand-${product.brand === 'lebonjoux' ? 'lebonjoux' : 'rhubee'}.html" class="brand-tag">${brand.name}</a>
+          <h1>${product.title}</h1>
+          <div class="pdp-price">${IDR(currentPrice())}</div>
+          <p class="pdp-desc">${product.desc}</p>
+
+          <div class="option-block">
+            <label>Style</label>
+            <div class="option-row" id="typeRow">
+              ${["T-Shirt","Long Sleeve","Hoodie"].map(t => `
+                <button class="opt-btn ${state.type===t?'active':''}" data-type="${t}">${t}</button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="option-block">
+            <label>Size — S to XXXL</label>
+            <div class="option-row" id="sizeRow">
+              ${product.sizes.map(s => `<button class="opt-btn ${state.size===s?'active':''}" data-size="${s}">${s}</button>`).join("")}
+            </div>
+          </div>
+
+          <div class="option-block">
+            <label>Print Placement</label>
+            <div class="option-row" id="placementRow">
+              ${["Front","Back"].map(pl => `<button class="opt-btn ${state.placement===pl?'active':''}" data-placement="${pl}">${pl}</button>`).join("")}
+            </div>
+          </div>
+
+          <div class="pdp-actions">
+            <button class="btn btn-secondary" id="addCartBtn">Add to Cart</button>
+            <button class="btn btn-primary" id="checkoutBtn">Checkout Now</button>
+          </div>
+          <p class="pdp-note" id="pdpMsg">&nbsp;</p>
+
+          <div class="info-accordion">
+            <details class="acc-item" open>
+              <summary>Product Details</summary>
+              <div class="acc-body">
+                <ul style="margin:0;padding-left:18px;">
+                  ${FEATURE_BULLETS.map(b => `<li style="margin-bottom:6px;">${b}</li>`).join("")}
+                </ul>
+              </div>
+            </details>
+            <details class="acc-item">
+              <summary>Size Guide</summary>
+              <div class="acc-body">
+                <table class="size-table-mini">
+                  <thead><tr><th>Size</th><th>Chest (cm)</th><th>Length (cm)</th></tr></thead>
+                  <tbody>
+                    <tr><td>S</td><td>46</td><td>66</td></tr>
+                    <tr><td>M</td><td>48</td><td>68</td></tr>
+                    <tr><td>L</td><td>50</td><td>70</td></tr>
+                    <tr><td>XL</td><td>52</td><td>72</td></tr>
+                    <tr><td>XXL</td><td>54</td><td>74</td></tr>
+                    <tr><td>XXXL</td><td>56</td><td>76</td></tr>
+                  </tbody>
+                </table>
+                <p style="margin-top:10px;">Measured flat, standard Indonesian distro sizing. Tolerance ±1–2cm depending on production batch.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const thumbsEl = document.getElementById("pdpThumbs");
+    if(thumbsEl){
+      thumbsEl.addEventListener("click", e => {
+        const t = e.target.closest(".pdp-thumb"); if(!t) return;
+        state.activeImg = parseInt(t.dataset.idx); render();
+      });
+    }
+    document.getElementById("typeRow").addEventListener("click", e => {
+      const b = e.target.closest(".opt-btn"); if(!b) return;
+      state.type = b.dataset.type; render();
+    });
+    document.getElementById("sizeRow").addEventListener("click", e => {
+      const b = e.target.closest(".opt-btn"); if(!b) return;
+      state.size = b.dataset.size; render();
+    });
+    document.getElementById("placementRow").addEventListener("click", e => {
+      const b = e.target.closest(".opt-btn"); if(!b) return;
+      state.placement = b.dataset.placement; render();
+    });
+    document.getElementById("addCartBtn").addEventListener("click", () => {
+      addToCart({ key:`${product.id}-${state.type}-${state.size}-${state.placement}`, id:product.id, title:product.title,
+        brand:brand.name, type:state.type, size:state.size, placement:state.placement, price:currentPrice(), qty:1,
+        image: product.images ? product.images[0] : null, phFrom:product.phFrom, phTo:product.phTo });
+      document.getElementById("pdpMsg").textContent = "Added to cart ✓";
+      refreshCartBadge();
+    });
+    document.getElementById("checkoutBtn").addEventListener("click", () => {
+      addToCart({ key:`${product.id}-${state.type}-${state.size}-${state.placement}`, id:product.id, title:product.title,
+        brand:brand.name, type:state.type, size:state.size, placement:state.placement, price:currentPrice(), qty:1,
+        image: product.images ? product.images[0] : null, phFrom:product.phFrom, phTo:product.phTo });
+      window.location.href = "cart.html";
+    });
+  }
+
+  function refreshCartBadge(){
+    const cartBtn = document.querySelector('a[href="cart.html"]');
+    const count = getCartCount();
+    if(cartBtn){
+      let el = cartBtn.querySelector(".cart-count");
+      if(!el && count>0){ el = document.createElement("span"); el.className="cart-count"; cartBtn.appendChild(el); }
+      if(el) el.textContent = count;
+    }
+  }
+
+  render();
+
+  const related = getProductsByBrand(product.brand).filter(p => p.id !== product.id).slice(0,3);
+  if(related.length){
+    document.getElementById("relatedWrap").style.display = "block";
+    const relatedGrid = document.getElementById("relatedGrid");
+    relatedGrid.innerHTML = related.map(productCardHTML).join("");
+    // Same fix as the featured grid on the homepage — these cards are injected after
+    // renderLayout()'s scroll-reveal observer already ran, so reveal them directly.
+    relatedGrid.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+  }
+</script>
+</body>
+</html>

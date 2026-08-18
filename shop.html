@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Indocolectivo</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Everything, In One Place</p>
+    <h1>Shop</h1>
+    <p>Every ready-made design from every brand in the collective, sorted and filtered your way.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="toolbar">
+      <span class="toolbar-count" id="shopCount"></span>
+      <div class="toolbar-controls">
+        <div class="tag-list" id="shopChips">
+          <button class="filter-chip active" data-brand="all">All Brands</button>
+          <button class="filter-chip" data-brand="lebonjoux">LeBoujoux</button>
+          <button class="filter-chip" data-brand="rhubee">Rhubee</button>
+        </div>
+        <select class="pill-select" id="shopSort">
+          <option value="featured">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name-asc">Name: A–Z</option>
+        </select>
+      </div>
+    </div>
+    <div class="product-grid" id="shopGrid"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/layout.js"></script>
+<script src="js/products.js"></script>
+<script src="js/shop.js"></script>
+<script>
+  renderLayout("shop");
+
+  const initialSearch = getQueryParam("search") || "";
+  const headerSearchInput = document.getElementById("headerSearchInput");
+  if(headerSearchInput && initialSearch) headerSearchInput.value = initialSearch;
+
+  initListing({
+    gridEl: document.getElementById("shopGrid"),
+    sortEl: document.getElementById("shopSort"),
+    chipWrap: document.getElementById("shopChips"),
+    chipField: "brand",
+    countEl: document.getElementById("shopCount"),
+    baseList: PRODUCTS,
+    initialSearch
+  });
+</script>
+</body>
+</html>

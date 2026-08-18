@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Account — Indocolectivo</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow">Welcome Back</p>
+    <h1>My Account</h1>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="pdp-grid" style="grid-template-columns:.9fr 1.1fr;">
+      <div class="simple-card">
+        <h3 style="font-size:18px;margin-bottom:20px;">Sign In</h3>
+        <form id="loginForm">
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" placeholder="you@email.com" required>
+          </div>
+          <div class="form-field">
+            <label>Password</label>
+            <input type="password" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;">Sign In</button>
+        </form>
+        <p class="pdp-note" style="text-align:center;margin-top:16px;">Demo form — no account is created or stored.</p>
+      </div>
+
+      <div>
+        <div class="simple-card" style="margin-bottom:20px;">
+          <h3 style="font-size:18px;margin-bottom:10px;">Order History</h3>
+          <p class="muted" style="font-size:13.5px;margin-bottom:18px;">Sign in to see past orders, custom print previews, and shipping status.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <span class="filter-chip" style="cursor:default;">No orders yet</span>
+          </div>
+        </div>
+        <div class="simple-card">
+          <h3 style="font-size:18px;margin-bottom:10px;">New here?</h3>
+          <p class="muted" style="font-size:13.5px;margin-bottom:18px;">Create an account to save sizing preferences, track custom print orders, and check out faster next time.</p>
+          <button class="btn btn-secondary" id="createAccountBtn">Create an Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/layout.js"></script>
+<script>
+  renderLayout("home");
+  document.getElementById("loginForm").addEventListener("submit", e => {
+    e.preventDefault();
+    alert("This is a demo — account sign-in is not connected to a backend yet.");
+  });
+  document.getElementById("createAccountBtn").addEventListener("click", () => {
+    alert("This is a demo — account creation is not connected to a backend yet.");
+  });
+</script>
+</body>
+</html>
