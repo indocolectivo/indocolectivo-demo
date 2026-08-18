@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indocolectivo — A Collective of Independent Apparel</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<!-- ================= CAROUSEL ================= -->
+<section class="carousel" id="heroCarousel">
+  <div class="carousel-track" id="carouselTrack">
+
+    <div class="carousel-slide">
+      <div class="slide-bg" style="background:#141414 url('assets/community/collective.jpg') center 45%/cover no-repeat;"></div>
+      <div class="slide-scrim"></div>
+      <div class="slide-content">
+        <p class="eyebrow">New Season</p>
+        <h2>Two Brands. One Collective.</h2>
+        <p>LeBoujoux and Rhubee, side by side under one roof — very different points of view, one standard for craft.</p>
+        <a href="shop.html" class="btn btn-light">Shop the Collective</a>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <div class="slide-bg" style="background:#141414 url('assets/products/mz-1.jpg') center 22%/cover no-repeat;"></div>
+      <div class="slide-scrim"></div>
+      <div class="slide-content">
+        <p class="eyebrow">LeBoujoux Drop</p>
+        <h2>Pop-Culture Graphic Tees</h2>
+        <p>Bold, nostalgic, heavyweight-cotton prints — from tokusatsu heroes to giant robots. Loud on purpose.</p>
+        <a href="brand-lebonjoux.html" class="btn btn-light">Explore LeBoujoux</a>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <div class="slide-bg" style="background:#141414 url('assets/community/rhubee-carousel.png') center 72%/cover no-repeat;"></div>
+      <div class="slide-scrim"></div>
+      <div class="slide-content">
+        <p class="eyebrow">Rhubee Capsule</p>
+        <h2>Essentials, Rethought</h2>
+        <p>Quiet colours and fabric that gets better with wear — the new Rhubee capsule is here.</p>
+        <a href="brand-rhubee.html" class="btn btn-light">Explore Rhubee</a>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <div class="slide-bg" style="background:#141414 url('assets/banners/dtf-xpress-print.png') center 55%/cover no-repeat;"></div>
+      <div class="slide-scrim"></div>
+      <div class="slide-content">
+        <p class="eyebrow">Custom Print Studio</p>
+        <h2>Design Your Own, One at a Time</h2>
+        <p>Upload your art, place it on a tee or hoodie, and print a single piece — no minimum order.</p>
+        <a href="create.html" class="btn btn-light">Start Creating</a>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <div class="slide-bg" style="background:#141414 url('assets/community/community.jpg') center 35%/cover no-repeat;"></div>
+      <div class="slide-scrim"></div>
+      <div class="slide-content">
+        <p class="eyebrow">Community</p>
+        <h2>Worn by the Collective</h2>
+        <p>See how customers are styling their Indocolectivo pieces — and share your own fit.</p>
+        <a href="gallery.html" class="btn btn-light">View Gallery</a>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="carousel-arrow prev" id="carPrev" aria-label="Previous slide"></button>
+  <button class="carousel-arrow next" id="carNext" aria-label="Next slide"></button>
+  <div class="carousel-nav" id="carouselNav"></div>
+</section>
+
+<!-- ================= HERO SPLIT ================= -->
+<section class="hero-split">
+  <div class="hero-panel wear">
+    <div class="panel-bg" style="background:#141414 url('assets/products/trex-3.jpg') center 15%/cover no-repeat;"></div>
+    <div class="panel-scrim"></div>
+    <div class="hero-panel-content">
+      <p class="eyebrow" style="color:#fff"><span style="opacity:.01">.</span></p>
+      <h3>Fashion to Wear.</h3>
+      <a href="shop.html" class="btn btn-light">Shop Now</a>
+    </div>
+  </div>
+  <div class="hero-panel create">
+    <div class="panel-bg" style="background:#141414 url('assets/community/apparel-to-create.jpg') center 40%/cover no-repeat;"></div>
+    <div class="panel-scrim"></div>
+    <div class="hero-panel-content">
+      <p class="eyebrow" style="color:#fff"><span style="opacity:.01">.</span></p>
+      <h3>Apparel to Create.</h3>
+      <a href="create.html" class="btn btn-teal">Customize</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">The Collective</p>
+        <h2>Our Brands</h2>
+      </div>
+      <a href="brands.html" class="view-all">View All Brands →</a>
+    </div>
+    <div class="brand-logo-row">
+      <a href="brand-lebonjoux.html" class="brand-logo-card reveal">
+        <img src="assets/logos/lebonjoux.png" alt="LeBoujoux logo">
+      </a>
+      <a href="brand-rhubee.html" class="brand-logo-card reveal">
+        <img src="assets/logos/rhubee.jpg" alt="Rhubee logo">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURED PRODUCTS ================= -->
+<section class="section on-tint">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Handpicked</p>
+        <h2>Featured Products</h2>
+        <p>A rotating edit across every brand in the collective — swapped weekly from the back office.</p>
+      </div>
+      <a href="shop.html" class="view-all">View All →</a>
+    </div>
+    <div class="product-grid" id="featuredGrid"></div>
+  </div>
+</section>
+
+<!-- ================= CREATE YOUR OWN CTA ================= -->
+<section class="section">
+  <div class="container">
+    <a href="create.html" class="create-cta reveal">
+      <div class="cta-bg" style="background:#141414 url('assets/community/create-your-own.jpg') center 40%/cover no-repeat;"></div>
+      <div class="cta-scrim"></div>
+      <div class="create-cta-content">
+        <p class="eyebrow" style="color:#D98A3D">Custom Print Studio</p>
+        <h2>Create Your Own</h2>
+        <p>Bring your own artwork — or start from scratch — and print a single, one-off tee or hoodie. Place it, size it, and see the price before you order.</p>
+        <span class="btn btn-teal">Start Designing →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/layout.js"></script>
+<script src="js/products.js"></script>
+<script>
+  renderLayout("home");
+
+  // ---- Featured products (6, editable from a future backend) ----
+  const featured = PRODUCTS.filter(p => p.featured).slice(0,6);
+  const featuredGrid = document.getElementById("featuredGrid");
+  featuredGrid.innerHTML = featured.map(productCardHTML).join("");
+  // These cards are injected after renderLayout() already wired up the scroll-reveal
+  // observer, so they'd never be picked up (and would stay invisible) otherwise.
+  featuredGrid.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+
+  // ---- Carousel ----
+  const track = document.getElementById("carouselTrack");
+  const slides = track.children;
+  const navWrap = document.getElementById("carouselNav");
+  let current = 0;
+  for(let i=0;i<slides.length;i++){
+    const dot = document.createElement("button");
+    dot.className = "carousel-dot" + (i===0?" active":"");
+    dot.addEventListener("click", () => goTo(i));
+    navWrap.appendChild(dot);
+  }
+  function goTo(i){
+    current = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    [...navWrap.children].forEach((d,idx) => d.classList.toggle("active", idx===current));
+  }
+  document.getElementById("carPrev").innerHTML = ICONS.chevronL;
+  document.getElementById("carNext").innerHTML = ICONS.chevronR;
+  document.getElementById("carPrev").addEventListener("click", () => goTo(current-1));
+  document.getElementById("carNext").addEventListener("click", () => goTo(current+1));
+  let autoplay = setInterval(() => goTo(current+1), 6000);
+  document.getElementById("heroCarousel").addEventListener("mouseenter", () => clearInterval(autoplay));
+  document.getElementById("heroCarousel").addEventListener("mouseleave", () => autoplay = setInterval(() => goTo(current+1), 6000));
+</script>
+</body>
+</html>
